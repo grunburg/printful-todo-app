@@ -9,31 +9,34 @@ use PDOStatement;
 class Task
 {
 
-    public static function all()
-    {
-        $db = new Database();
+    private Database $db;
 
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
+    public function all()
+    {
         $query = 'SELECT * FROM tasks';
 
-        $stmt = $db->connection()->prepare($query);
+        $stmt = $this->db->connection()->prepare($query);
         $stmt->execute();
 
-        return $stmt;
+        $this->show($stmt);
     }
 
-    public static function find(int $id)
+    public function find(int $id)
     {
-        $db = new Database();
+        $query = "SELECT * FROM tasks WHERE id = :id";
 
-        $query = 'SELECT * FROM tasks WHERE id = :id';
-
-        $stmt = $db->connection()->prepare($query);
+        $stmt = $this->db->connection()->prepare($query);
         $stmt->execute(['id' => $id]);
 
-        return $stmt;
+        $this->show($stmt);
     }
 
-    public static function fetch(PDOStatement $stmt)
+    public function show(PDOStatement $stmt)
     {
         $num = $stmt->rowCount();
 
@@ -42,6 +45,14 @@ class Task
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
+
+                /**
+                 * @var int $id
+                 * @var string $name
+                 * @var string $description
+                 * @var boolean $completed
+                 * @var string $created_at
+                 */
 
                 $item = [
                     'id' => $id,
@@ -54,10 +65,10 @@ class Task
                 array_push($tasks['data'], $item);
             }
 
-            echo json_encode($tasks);
+            print_r(json_encode($tasks));
             http_response_code(200);
         } else {
-            echo json_encode(['message' => 'Not Found']);
+            print_r(json_encode(['message' => 'Not Found']));
             http_response_code(404);
         }
     }
