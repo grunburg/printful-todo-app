@@ -2,20 +2,21 @@
 
 namespace App\Controllers;
 
+use App\Core\Database\Database;
 use App\Models\Task;
 
 class TaskController {
 
     public static function index()
     {
-        $task = Task::all();
-        Task::fetch($task);
+        $task = new Task(new Database());
+        $task->all();
     }
 
     public static function show($id)
     {
-        $task = Task::find($id);
-        Task::fetch($task);
+        $task = new Task(new Database());
+        $task->find($id);
     }
 
     public static function create()
