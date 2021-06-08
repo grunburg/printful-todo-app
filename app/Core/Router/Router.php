@@ -15,6 +15,16 @@ class Router
         self::match('POST', $route, $fn);
     }
 
+    public static function put(string $route, callable $fn)
+    {
+        self::match('PUT', $route, $fn);
+    }
+
+    public static function delete(string $route, callable $fn)
+    {
+        self::match('DELETE', $route, $fn);
+    }
+
     public static function match($method, $route, $fn)
     {
         $request = explode('?', $_SERVER['REQUEST_URI']);
