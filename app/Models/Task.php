@@ -72,4 +72,24 @@ class Task
             http_response_code(404);
         }
     }
+
+    public function insert(array $data)
+    {
+        $query = 'INSERT INTO tasks (name, description) VALUES (:name, :description)';
+
+        $stmt = $this->db->connection()->prepare($query);
+
+        //@TODO Validation
+
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':description', $data['description']);
+
+        if ($stmt->execute()) {
+            print_r(json_encode(['message' => 'Post Created']));
+            http_response_code(201);
+        } else {
+            print_r(json_encode(['message' => $stmt->errorInfo()]));
+            http_response_code(400);
+        }
+    }
 }
