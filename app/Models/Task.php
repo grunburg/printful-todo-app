@@ -85,7 +85,48 @@ class Task
         $stmt->bindParam(':description', $data['description']);
 
         if ($stmt->execute()) {
-            print_r(json_encode(['message' => 'Post Created']));
+            print_r(json_encode(['message' => 'Task Created']));
+            http_response_code(201);
+        } else {
+            print_r(json_encode(['message' => $stmt->errorInfo()]));
+            http_response_code(400);
+        }
+    }
+
+    public function update(int $id, array $data)
+    {
+        $query = 'UPDATE tasks SET name = :name, description = :description, completed = :completed WHERE id = :id';
+
+        $stmt = $this->db->connection()->prepare($query);
+
+        //@TODO Validation
+
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':name', $data['name']);
+        $stmt->bindParam(':description', $data['description']);
+        $stmt->bindParam(':completed', $data['completed']);
+
+        if ($stmt->execute()) {
+            print_r(json_encode(['message' => 'Task Updated']));
+            http_response_code(201);
+        } else {
+            print_r(json_encode(['message' => $stmt->errorInfo()]));
+            http_response_code(400);
+        }
+    }
+
+    public function delete(int $id)
+    {
+        $query = 'DELETE FROM tasks WHERE id = :id';
+
+        $stmt = $this->db->connection()->prepare($query);
+
+        //@TODO Validation
+
+        $stmt->bindParam(':id', $id);
+
+        if ($stmt->execute()) {
+            print_r(json_encode(['message' => 'Task Deleted']));
             http_response_code(201);
         } else {
             print_r(json_encode(['message' => $stmt->errorInfo()]));
