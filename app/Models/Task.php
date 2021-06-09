@@ -57,11 +57,9 @@ class Task extends Model
                 array_push($tasks['data'], $item);
             }
 
-            print_r(json_encode($tasks));
-            http_response_code(200);
+            $this->response($tasks, 200);
         } else {
-            print_r(json_encode(['message' => 'Not Found']));
-            http_response_code(404);
+            $this->response(['message' => 'Task not found.'], 404);
         }
     }
 
@@ -77,11 +75,9 @@ class Task extends Model
         $stmt->bindParam(':description', $data['description']);
 
         if ($stmt->execute()) {
-            print_r(json_encode(['message' => 'Task Created']));
-            http_response_code(201);
+            $this->response(['message' => 'Task was created successfully.'], 201);
         } else {
-            print_r(json_encode(['message' => $stmt->errorInfo()]));
-            http_response_code(400);
+            $this->response(['message' => $stmt->errorInfo()], 400);
         }
     }
 
@@ -99,11 +95,9 @@ class Task extends Model
         $stmt->bindParam(':completed', $data['completed']);
 
         if ($stmt->execute()) {
-            print_r(json_encode(['message' => 'Task Updated']));
-            http_response_code(201);
+            $this->response(['message' => 'Task was updated successfully.'], 201);
         } else {
-            print_r(json_encode(['message' => $stmt->errorInfo()]));
-            http_response_code(400);
+            $this->response(['message' => $stmt->errorInfo()], 400);
         }
     }
 
@@ -118,11 +112,9 @@ class Task extends Model
         $stmt->bindParam(':id', $id);
 
         if ($stmt->execute()) {
-            print_r(json_encode(['message' => 'Task Deleted']));
-            http_response_code(201);
+            $this->response(['message' => 'Task was deleted successfully.'], 201);
         } else {
-            print_r(json_encode(['message' => $stmt->errorInfo()]));
-            http_response_code(400);
+            $this->response(['message' => $stmt->errorInfo()], 400);
         }
     }
 }
