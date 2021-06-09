@@ -10,13 +10,13 @@ class TaskController
 
     public static function index()
     {
-        $task = new Task(new Database);
+        $task = new Task;
         $task->all();
     }
 
     public static function show(int $id)
     {
-        $task = new Task(new Database);
+        $task = new Task;
         $task->find($id);
     }
 
@@ -24,7 +24,7 @@ class TaskController
     {
         $data = (array) json_decode(file_get_contents('php://input'), true);
 
-        $task = new Task(new Database);
+        $task = new Task;
         $task->insert($data);
     }
 
@@ -32,13 +32,13 @@ class TaskController
     {
         $data = (array) json_decode(file_get_contents('php://input'), true);
 
-        $task = new Task(new Database);
+        $task = new Task;
         $task->update($id, $data);
     }
 
     public static function delete(int $id)
     {
-        $task = new Task(new Database);
+        $task = new Task;
         $task->delete($id);
     }
 

@@ -13,17 +13,22 @@ class Database
     private string $username = 'root';
     private string $password = 'password';
 
-    public function connection(): ?PDO
+    private PDO $connection;
+
+    public function __construct()
     {
-        $connection = null;
 
         try {
-            $connection = new PDO("mysql:dbname=$this->name;host=$this->host", $this->username, $this->password);
+            $this->connection = new PDO("mysql:dbname=$this->name;host=$this->host", $this->username, $this->password);
         } catch (PDOException $exception) {
             echo $exception->getMessage();
         }
 
-        return $connection;
+    }
+
+    public function connection(): PDO
+    {
+        return $this->connection;
     }
 
 }

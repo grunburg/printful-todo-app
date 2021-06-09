@@ -2,19 +2,11 @@
 
 namespace App\Models;
 
-use App\Core\Database\Database;
 use PDO;
 use PDOStatement;
 
-class Task
+class Task extends Model
 {
-
-    private Database $db;
-
-    public function __construct($db)
-    {
-        $this->db = $db;
-    }
 
     public function all()
     {
