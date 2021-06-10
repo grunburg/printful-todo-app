@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Task;
 
-class TaskController extends Controller
+class TaskController
 {
 
     public static function index(Task $task)
