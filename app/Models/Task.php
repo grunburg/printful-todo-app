@@ -83,7 +83,7 @@ class Task extends Model
 
     public function update(int $id, array $data)
     {
-        $query = 'UPDATE tasks SET name = :name, description = :description, completed = :completed WHERE id = :id';
+        $query = 'UPDATE tasks SET name = :name, description = :description WHERE id = :id';
 
         $stmt = $this->db->connection()->prepare($query);
 
@@ -92,6 +92,23 @@ class Task extends Model
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $data['name']);
         $stmt->bindParam(':description', $data['description']);
+
+        if ($stmt->execute()) {
+            $this->response(['message' => 'Task was updated successfully.'], 201);
+        } else {
+            $this->response(['message' => $stmt->errorInfo()], 400);
+        }
+    }
+
+    public function mark(int $id, array $data)
+    {
+        $query = 'UPDATE tasks SET completed = :completed WHERE id = :id';
+
+        $stmt = $this->db->connection()->prepare($query);
+
+        //@TODO Validation
+
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':completed', $data['completed']);
 
         if ($stmt->execute()) {

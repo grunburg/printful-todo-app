@@ -29,6 +29,12 @@ class TaskController
         $task->update($id, $data);
     }
 
+    public static function mark(Task $task, int $id)
+    {
+        $data = (array) json_decode(file_get_contents('php://input'), true);
+        $task->mark($id, $data);
+    }
+
     public static function delete(Task $task, int $id)
     {
         $task->delete($id);

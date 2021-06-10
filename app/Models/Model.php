@@ -38,4 +38,6 @@ class Model
         echo json_encode($data);
     }
 
+    
+
 }
