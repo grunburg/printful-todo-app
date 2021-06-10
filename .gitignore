@@ -12,6 +12,7 @@ composer.lock
 # Node
 node_modules
 dist
+package-lock.json
 
 # Log Files
 npm-debug.log*
