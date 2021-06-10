@@ -2,9 +2,19 @@
 .idea
 
 # Composer
-*/composer.phar
-*/vendor/
-*/composer.lock
+composer.phar
+vendor
+composer.lock
 
 # Apple
 .DS_Store
+
+# Node
+node_modules
+dist
+
+# Log Files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
