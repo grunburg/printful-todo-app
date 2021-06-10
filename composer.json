@@ -4,7 +4,6 @@
   },
   "autoload": {
     "files": [
-      "app/Helper/helper.php",
       "routes/routes.php"
     ],
     "psr-4": {
