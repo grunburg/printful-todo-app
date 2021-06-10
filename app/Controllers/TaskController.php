@@ -2,43 +2,35 @@
 
 namespace App\Controllers;
 
-use App\Core\Database\Database;
 use App\Models\Task;
 
-class TaskController
+class TaskController extends Controller
 {
 
-    public static function index()
+    public static function index(Task $task)
     {
-        $task = new Task;
         $task->all();
     }
 
-    public static function show(int $id)
+    public static function show(Task $task, $id)
     {
-        $task = new Task;
         $task->find($id);
     }
 
-    public static function create()
+    public static function create(Task $task)
     {
         $data = (array) json_decode(file_get_contents('php://input'), true);
-
-        $task = new Task;
         $task->insert($data);
     }
 
-    public static function update(int $id)
+    public static function update(Task $task, int $id)
     {
         $data = (array) json_decode(file_get_contents('php://input'), true);
-
-        $task = new Task;
         $task->update($id, $data);
     }
 
-    public static function delete(int $id)
+    public static function delete(Task $task, int $id)
     {
-        $task = new Task;
         $task->delete($id);
     }
 

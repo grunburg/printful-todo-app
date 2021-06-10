@@ -7,7 +7,7 @@ class Router
 
     public static function get(string $route, callable $fn)
     {
-       self::match('GET', $route, $fn);
+        self::match('GET', $route, $fn);
     }
 
     public static function post(string $route, callable $fn)
@@ -25,20 +25,20 @@ class Router
         self::match('DELETE', $route, $fn);
     }
 
-    public static function match($method, $route, $fn)
+    private static function match($method, $route, $fn)
     {
-        $request = explode('?', $_SERVER['REQUEST_URI']);
+        $uri = explode('?', $_SERVER['REQUEST_URI']);
+        $request = $_SERVER['REQUEST_METHOD'];
 
-        if ($method === $_SERVER['REQUEST_METHOD']) {
-            if (preg_match(self::pattern($route), $request[0], $values)) {
-                call_user_func_array($fn, array_slice($values, 1));
-                return;
-            }
+        if (preg_match(self::pattern($route), $uri[0], $values) && $request === $method) {
+            call_user_func_array($fn, array_slice($values, 1));
+            return;
         }
     }
 
-    public static function pattern($route): string
+    private static function pattern($route): string
     {
         return sprintf('#^%s$#', preg_replace('#:([^/]+)#', '([^/]+)', $route));
     }
+
 }
