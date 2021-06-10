@@ -22,6 +22,11 @@ class Task extends Model
     {
         $query = "SELECT * FROM tasks WHERE id = :id";
 
+        if (!$this->validate($id, 'integer')) {
+            $this->response(['error' => 'Given parameter was not integer.'], 400);
+            return;
+        }
+
         $stmt = $this->db->connection()->prepare($query);
         $stmt->execute(['id' => $id]);
 
@@ -69,7 +74,7 @@ class Task extends Model
 
         $stmt = $this->db->connection()->prepare($query);
 
-        //@TODO Validation
+        // @TODO Sanitization needed?
 
         $stmt->bindParam(':name', $data['name']);
         $stmt->bindParam(':description', $data['description']);
@@ -87,7 +92,12 @@ class Task extends Model
 
         $stmt = $this->db->connection()->prepare($query);
 
-        //@TODO Validation
+        if (!$this->validate($id, 'integer')) {
+            $this->response(['error' => 'Given parameter was not integer.'], 400);
+            return;
+        }
+
+        // @TODO Sanitization needed?
 
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $data['name']);
@@ -106,15 +116,23 @@ class Task extends Model
 
         $stmt = $this->db->connection()->prepare($query);
 
-        //@TODO Validation
+        if (!$this->validate($id, 'integer')) {
+            $this->response(['error' => 'Given parameter was not integer.'], 400);
+            return;
+        }
+
+        if (!$this->validate($data['completed'], 'boolean')) {
+            $this->response(['error' => 'Given parameter was not boolean.'], 400);
+            return;
+        }
 
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':completed', $data['completed']);
 
         if ($stmt->execute()) {
-            $this->response(['message' => 'Task was updated successfully.'], 201);
+            $this->response(['success' => 'Task was updated successfully.'], 201);
         } else {
-            $this->response(['message' => $stmt->errorInfo()], 400);
+            $this->response(['error' => $stmt->errorInfo()], 400);
         }
     }
 
@@ -124,7 +142,10 @@ class Task extends Model
 
         $stmt = $this->db->connection()->prepare($query);
 
-        //@TODO Validation
+        if (!$this->validate($id, 'integer')) {
+            $this->response(['error' => 'Given parameter was not integer.'], 400);
+            return;
+        }
 
         $stmt->bindParam(':id', $id);
 

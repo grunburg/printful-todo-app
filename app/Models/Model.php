@@ -38,6 +38,18 @@ class Model
         echo json_encode($data);
     }
 
-    
+    public function validate($data, string $type): bool
+    {
+        switch ($type) {
+            case 'boolean':
+                if ($data == 1 || $data == 0) return true;
+                break;
+            case 'integer':
+                if (is_int($data)) return true;
+                break;
+        }
+
+        return false;
+    }
 
 }
