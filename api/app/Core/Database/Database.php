@@ -13,7 +13,7 @@ class Database
     private string $username = 'root';
     private string $password = 'password';
 
-    private string $table = "create_tasks_table";
+    private string $table = 'create_tasks_table';
 
     private PDO $connection;
 
@@ -33,15 +33,10 @@ class Database
         return $this->connection;
     }
 
-    public function create()
+    public function createTable()
     {
-        $query = 'SELECT 1 FROM tasks LIMIT 1';
-        $result = $this->connection()->query($query);
-
-        if ($result == false) {
-            $file = file_get_contents(ROOT . '/database/' . $this->table . '.sql');
-            $this->connection()->query($file);
-        }
+        $file = file_get_contents(ROOT . '/database/' . $this->table . '.sql');
+        $this->connection()->query($file);
     }
 
 }

@@ -10,6 +10,8 @@ class Task extends Model
 
     public function all()
     {
+        $this->db->createTable();
+
         $query = 'SELECT * FROM tasks';
 
         $stmt = $this->db->connection()->prepare($query);
@@ -20,6 +22,8 @@ class Task extends Model
 
     public function find(int $id)
     {
+        $this->db->createTable();
+
         $query = "SELECT * FROM tasks WHERE id = :id";
 
         if (!$this->validate($id, 'integer')) {
@@ -70,11 +74,11 @@ class Task extends Model
 
     public function insert(array $data)
     {
+        $this->db->createTable();
+
         $query = 'INSERT INTO tasks (name, description) VALUES (:name, :description)';
 
         $stmt = $this->db->connection()->prepare($query);
-
-        // @TODO Sanitization needed?
 
         $stmt->bindParam(':name', $data['name']);
         $stmt->bindParam(':description', $data['description']);
@@ -96,8 +100,6 @@ class Task extends Model
             $this->response(['error' => 'Given parameter was not integer.'], 400);
             return;
         }
-
-        // @TODO Sanitization needed?
 
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $data['name']);
