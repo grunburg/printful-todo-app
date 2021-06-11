@@ -1,30 +1,46 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="p-4 container mx-auto max-w-lg">
+    <Navigation title="Tasks"/>
+
+    <main class="py-4">
+      <router-view/>
+    </main>
+
   </div>
-  <router-view/>
 </template>
 
+<script>
+import Navigation from "./components/Navigation.vue";
+
+export default {
+  components: {
+    Navigation
+  },
+
+  name: 'App',
+
+  data() {
+    return {
+      tasks: []
+    }
+  },
+
+  created() {
+    this.tasks = [
+      {
+        id: 1,
+        name: 'My Task',
+        description: 'A simple task',
+        isCompleted: true
+      }
+    ]
+  }
+}
+
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+body {
+  @apply bg-gray-200;
 }
 </style>
