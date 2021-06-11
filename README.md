@@ -1,5 +1,15 @@
 # Printful developer school homework 📚
 
+### Technologies & Tools Used 🛠
+* **PHP** for backend api
+* **Composer** - autloading PHP classes
+* **Docker** - used for running MySQL database
+* **Vite.js/Vue** for frontend app
+* **Tailwind.css** for frontend app styling
+* **Git** - verion control
+* **Postman** for debugging backend api
+* **Figma** for designing the main app
+
 ### Setup
 1. Go to your prefered project directory and clone this repository.
 ```
@@ -28,3 +38,5 @@ $ npm install && npm run build
 ```
 $ npm run serve
 ```
+
+#### Disclaimer: The app is not yet finished as I had a few exams in the middle of this task, I will try to finish this app ASAP.
