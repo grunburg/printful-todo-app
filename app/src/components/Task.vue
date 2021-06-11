@@ -1,8 +1,8 @@
 <template>
-  <router-link :to="{ name: 'Task', params: {id: id}}"
-               class="p-4 flex justify-between items-center w-full rounded-xl transition ease-in-out hover:bg-gray-100 hover:shadow-sm focus:outline-none focus:bg-gray-100">
+  <router-link :to="{ name: 'Task', params: {id: TaskId}}"
+               class="p-4 flex justify-between items-center rounded-xl transition ease-in-out hover:bg-gray-100 hover:shadow-sm focus:outline-none focus:bg-gray-100">
     <div class="flex items-center">
-      <input type="checkbox" :id="id"
+      <input type="checkbox" :id="TaskId"
              class="mr-3 h-4 w-4 text-amber-500 bg-gray-300 rounded-full border-none focus:ring-amber-300 focus:ring-offset-0"
              :checked="isCompleted">
       <span class="text-gray-800 font-medium">{{ name }}</span>
@@ -20,7 +20,7 @@ export default {
   name: 'Task',
 
   props: {
-    id: Number,
+    TaskId: Number,
     name: String,
     isCompleted: Boolean
   }

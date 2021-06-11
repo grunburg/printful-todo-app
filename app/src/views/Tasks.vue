@@ -1,6 +1,6 @@
 <template>
   <div v-for="task in tasks" :key="task.id">
-    <Task :id="task.id" :name="task.name" :is-completed="task.completed"/>
+    <Task :id="task.id" :name="task.name" :is-completed="Boolean(Number(task.completed))"/>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 
   data() {
     return {
-      tasks: []
+      tasks: Array
     }
   },
 
