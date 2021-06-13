@@ -8,6 +8,7 @@
 * **Tailwind.css** for frontend app styling
 * **Git** - verion control
 * **Postman** for debugging backend api
+* **TablePlus** for viewing & managing database
 * **Figma** for designing the main app
 
 ### Setup
