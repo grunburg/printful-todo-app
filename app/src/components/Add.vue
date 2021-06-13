@@ -25,7 +25,7 @@ export default {
 
   data() {
     return {
-      newTask: ''
+      newTask: '',
     }
   },
 
@@ -35,9 +35,8 @@ export default {
 
       axios.post('/tasks/create', {
         name: this.newTask
-      })
+      }).then(response => this.$emit('addTask', response.data))
 
-      this.$emit('addTask', this.newTask)
 
       this.newTask = ''
     }

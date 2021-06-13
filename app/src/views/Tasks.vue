@@ -20,8 +20,6 @@ import Add from "../components/Add.vue";
 import Sort from "../components/Button.vue";
 
 import axios from "axios";
-import mitt from 'mitt';
-
 
 export default {
   name: 'Tasks',
@@ -40,10 +38,11 @@ export default {
   },
 
   methods: {
-    newTask(value) {
+    newTask(task) {
       this.tasks.push({
-        name: value,
-        description: null,
+        id: task.id,
+        name: task.name,
+        description: task.description,
         completed: false
       })
     },
@@ -52,10 +51,6 @@ export default {
       axios.get('/tasks')
           .then(response => this.tasks = response.data.data)
     }
-  },
-
-  created() {
-    mitt().on('deleteTask', (id) => console.log(id))
   },
 
   mounted() {
