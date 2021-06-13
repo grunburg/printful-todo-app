@@ -1,28 +1,40 @@
 <template>
-  <router-link :to="{ name: 'Task', params: {id: TaskId}}"
-               class="p-4 flex justify-between items-center rounded-xl transition ease-in-out hover:bg-gray-100 hover:shadow-sm focus:outline-none focus:bg-gray-100">
-    <div class="flex items-center">
-      <input type="checkbox" :id="TaskId"
-             class="mr-3 h-4 w-4 text-amber-500 bg-gray-300 rounded-full border-none focus:ring-amber-300 focus:ring-offset-0"
-             :checked="isCompleted">
-      <span class="text-gray-800 font-medium">{{ name }}</span>
+  <router-link :to="{ name: 'Task', params: {id: id } }" :class="{'opacity-75': completed}"
+               class="block w-full bg-gray-100 rounded-2xl">
+    <div class="p-3 flex items-center">
+      <div class="flex items-center">
+        <input type="checkbox" :id="id" @click.stop
+               class="mr-2 w-5 h-5 border-2 border-blue-500 bg-transparent text-blue-500 rounded-md focus:ring-offset-0 focus:ring-3 focus:ring-blue-200"
+               :checked="completed" v-model="completed" @click="checked">
+        <span :class="{'line-through': completed}" class="text-gray-900 font-medium">{{ name }}</span>
+      </div>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd"
-            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-            clip-rule="evenodd"/>
-    </svg>
+    <div class="px-3 pb-3" v-if="description !== null">
+      <span class="block text-sm text-gray-600">{{ description }}</span>
+    </div>
   </router-link>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'Task',
 
   props: {
-    TaskId: Number,
+    id: Number,
     name: String,
-    isCompleted: Boolean
+    description: String,
+    completed: Boolean
+  },
+
+  methods: {
+    checked() {
+      axios.put(`/tasks/${this.id}/mark`, {
+        id: this.id,
+        completed: Number(!this.completed)
+      }).catch(error => console.log(error))
+    }
   }
 }
 </script>

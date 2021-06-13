@@ -1,8 +1,7 @@
 <template>
-  <div class="p-4 container mx-auto max-w-lg">
-    <Navigation title="Tasks"/>
-
-    <main class="py-4">
+  <div class="container mx-auto max-w-lg">
+    <Navigation/>
+    <main>
       <router-view/>
     </main>
 
@@ -11,29 +10,18 @@
 
 <script>
 import Navigation from "./components/Navigation.vue";
+import Add from "./components/Add.vue";
 
 export default {
   components: {
-    Navigation
+    Navigation,
+    Add
   },
 
   name: 'App',
 
   data() {
-    return {
-      tasks: []
-    }
-  },
-
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        name: 'My Task',
-        description: 'A simple task',
-        isCompleted: true
-      }
-    ]
+    return {}
   }
 }
 
@@ -41,6 +29,6 @@ export default {
 
 <style>
 body {
-  @apply bg-gray-200;
+  @apply bg-gray-50;
 }
 </style>

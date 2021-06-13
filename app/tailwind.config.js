@@ -5,10 +5,17 @@ module.exports = {
   darkMode: false,
   theme: {
     colors: {
-      gray: colors.trueGray,
-      amber: colors.amber
+      transparent: 'transparent',
+      gray: colors.gray,
+      blue: colors.blue,
+      green: colors.green,
+      red: colors.red
     },
-    extend: {},
+    extend: {
+      ringWidth: {
+        '3': '3px'
+      }
+    },
   },
   variants: {
     extend: {},
