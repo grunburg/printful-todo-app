@@ -27,9 +27,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
-import Alert from "../components/Alert.vue";
+import axios from "axios"
+import Alert from "../components/Alert.vue"
 
 export default {
   name: 'Task',
@@ -52,8 +51,8 @@ export default {
     },
 
     deleteTask() {
-      this.$router.push({path: '/'})
       axios.delete(`/tasks/${this.task.id}/delete`)
+      this.$router.push({path: '/'})
     },
 
     updateTask() {

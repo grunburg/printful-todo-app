@@ -6,4 +6,6 @@ import 'tailwindcss/tailwind.css'
 
 axios.defaults.baseURL = 'http://localhost:8000/api'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+
+app.use(router).mount('#app')
