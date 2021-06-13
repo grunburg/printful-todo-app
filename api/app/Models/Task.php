@@ -103,7 +103,11 @@ class Task extends Model
         $stmt->bindParam(':description', $data['description']);
 
         if ($stmt->execute()) {
-            $this->response(['message' => 'Task was created successfully.'], 201);
+            $this->response([
+                'id' => $this->db->connection()->lastInsertId(),
+                'name' => $data['name'],
+                'description' => $data['description']
+            ], 201);
         } else {
             $this->response(['message' => $stmt->errorInfo()], 400);
         }
