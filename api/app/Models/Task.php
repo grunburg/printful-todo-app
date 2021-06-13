@@ -17,28 +17,6 @@ class Task extends Model
         $stmt = $this->db->connection()->prepare($query);
         $stmt->execute();
 
-        $this->show($stmt);
-    }
-
-    public function find(int $id)
-    {
-        $this->db->createTable();
-
-        $query = "SELECT * FROM tasks WHERE id = :id";
-
-        if (!$this->validate($id, 'integer')) {
-            $this->response(['error' => 'Given parameter was not integer.'], 400);
-            return;
-        }
-
-        $stmt = $this->db->connection()->prepare($query);
-        $stmt->execute(['id' => $id]);
-
-        $this->show($stmt);
-    }
-
-    public function show(PDOStatement $stmt)
-    {
         $num = $stmt->rowCount();
 
         if ($num > 0) {
@@ -67,6 +45,47 @@ class Task extends Model
             }
 
             $this->response($tasks, 200);
+        } else {
+            $this->response(['message' => 'Task not found.'], 404);
+        }
+    }
+
+    public function find(int $id)
+    {
+        $this->db->createTable();
+
+        $query = "SELECT * FROM tasks WHERE id = :id";
+
+        if (!$this->validate($id, 'integer')) {
+            $this->response(['error' => 'Given parameter was not integer.'], 400);
+            return;
+        }
+
+        $stmt = $this->db->connection()->prepare($query);
+        $stmt->execute(['id' => $id]);
+
+        $num = $stmt->rowCount();
+
+        if ($num > 0) {
+            extract($stmt->fetch(PDO::FETCH_ASSOC));
+
+            /**
+             * @var int $id
+             * @var string $name
+             * @var string $description
+             * @var boolean $completed
+             * @var string $created_at
+             */
+
+            $task = [
+                'id' => $id,
+                'name' => $name,
+                'description' => $description,
+                'completed' => $completed,
+                'created_at' => $created_at,
+            ];
+
+            $this->response($task, 200);
         } else {
             $this->response(['message' => 'Task not found.'], 404);
         }
