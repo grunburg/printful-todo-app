@@ -38,5 +38,3 @@ $ npm install && npm run build
 ```
 $ npm run serve
 ```
-
-#### Disclaimer: The app is not yet finished as I had a few exams in the middle of this task, I will try to finish this app ASAP.
