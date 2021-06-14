@@ -1,6 +1,8 @@
 # Printful developer school homework 📚
 
-This is my take on Printful developer school homework. This app has two seperate -ends: backend REST API in **PHP** and frontent with modern JS framework - **Vue** which consumes the backend API. 
+This is my take on Printful developer school homework. This app has two seperate -ends: backend REST API in **PHP** and frontent with modern JS framework - **Vue** which consumes the backend API.
+
+![Image of the app](https://i.ibb.co/bHnGF61/Todo.png)
 
 ### Technologies & Tools Used 🛠
 * **PHP** for backend api
