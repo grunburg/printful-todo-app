@@ -20,7 +20,7 @@ I would have prefered to use [phpdotenv](https://github.com/vlucas/phpdotenv) fo
 ```
 $ git clone https://github.com/grunburg/printful-todo-app . && cd printful-todo-app
 ```
-2. Create a and configure the [database](https://github.com/grunburg/printful-todo-app/blob/master/api/app/Core/Database/Database.php). For quick-start you can use [Docker](https://www.docker.com/) 🐳 and this MySQL image:
+2. Create a and configure the [database](https://github.com/grunburg/printful-todo-app/blob/master/api/app/Core/Database/Database.php) (no need to setup database table, it's automatic, you just have to open todo app). For quick-start you can use [Docker](https://www.docker.com/) 🐳 and this MySQL image:
 ```
 $ docker run --name printful-todo-app -p 3306:3306 \
 -e MYSQL_ROOT_PASSWORD=password \
