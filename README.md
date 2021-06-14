@@ -1,5 +1,7 @@
 # Printful developer school homework 📚
 
+This is my take on Printful developer school homework. This app has two seperate -ends: backend REST API in **PHP** and frontent with modern JS framework - **Vue** which consumes the backend API. 
+
 ### Technologies & Tools Used 🛠
 * **PHP** for backend api
 * **Composer** - autloading PHP classes
@@ -10,6 +12,8 @@
 * **Postman** for debugging backend api
 * **TablePlus** for viewing & managing database
 * **Figma** for designing the main app
+
+I would have prefered to use [phpdotenv](https://github.com/vlucas/phpdotenv) for easier app configuration, but I did not know if I'm allowed to use any packages.
 
 ### Setup
 1. Go to your prefered project directory and clone this repository.
