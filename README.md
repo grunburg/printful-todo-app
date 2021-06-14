@@ -35,11 +35,11 @@ $ cd api && composer dump-autoload -o
 ```
 $ php -S localhost:8000 app.php
 ```
-4. Go to `/printful-todo-app/app` and install all the necessary packages. [Node and it's package manager](https://nodejs.org/en/) is necessary.
+5. Go to `/printful-todo-app/app` and install all the necessary packages. [Node and it's package manager](https://nodejs.org/en/) is necessary.
 ```
 $ npm install && npm run build
 ```
-5. Start the FE app and do your tasks! 🥳
+6. Start the FE app and do your tasks! 🥳
 ```
 $ npm run serve
 ```
