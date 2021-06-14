@@ -25,7 +25,7 @@ $ docker run --name printful-todo-app -p 3306:3306 \
 ```
 3. Generate autoload for the API. You will need to have [Composer](https://getcomposer.org/) for this setp.
 ```
-$ cd api && composer dump-autoload
+$ cd api && composer dump-autoload -o
 ```
 4. Start the API and it should be accessable at [localhost:8000](http://localhost:8000/)
 ```
